@@ -30,7 +30,7 @@ iface wlan0 inet static
 Enter the following into the file:  
 interface=wlan0  
 //	driver=nl80211  
-ssid=**YOUR_SSID_HERE** 
+ssid=**YOUR_SSID_HERE**  
 //	hw_mode=g  
 //	channel=6  
 channel=9  
@@ -42,7 +42,7 @@ channel=9
 //	ignore_broadcast_ssid=0  
 wpa=2  
 wpa_key_mgmt=WPA-PSK  
-wpa_passphrase=**YOUR_PASSPHRASE_HERE**
+wpa_passphrase=**YOUR_PASSPHRASE_HERE**  
 rsn_pairwise=CCMP  
 
 ### Inform HostAPD of location of the previously created configuration file  
@@ -93,23 +93,16 @@ dhcp-range=192.168.2.2,192.168.2.100,12h  # Assign IP addresses between 192.168.
 Remove the # from the beginning of the line containing: net.ipv4.ip_forward=1  
 
 **$ sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"**  
-
 **$ sudo iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE**  
-
 **$ sudo iptables -A FORWARD -i wlan0 -o eth0 -m state --state RELATED,ESTABLISHED -j ACCEPT**  
-
 **$ sudo iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT**  
-
 **$ sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"**  
-
 **$ sudo nano /etc/rc.local**  
 
-Just above the line exit 0, add the following line: 
-iptables-restore < /etc/iptables.ipv4.nat
+Just above the line exit 0, add the following line: iptables-restore < /etc/iptables.ipv4.nat
 
 ### Restart the Raspberry Pi
 **$ sudo reboot**
-
 
 ### Sources:  
 [Setting up a Raspberry Pi 3 as an Access Point - SparkFun Learn](https://learn.sparkfun.com/tutorials/setting-up-a-raspberry-pi-3-as-an-access-point/all)  
