@@ -3,11 +3,13 @@ This could be done in fewer steps, but the way I initially set it up was to firs
 
 ### Install required packages  
 **$ sudo apt-get -y install hostapd dnsmasq**  
-Ignore the wireless interface  
+
+### Ignore the wireless interface  
 **$ sudo nano /etc/dhcpcd.conf**  
-### Set a static IP  
 At the bottom of the file, add:	  
 denyinterfaces wlan0  
+
+### Set a static IP  
 **$ sudo nano /etc/network/interfaces**  
 At the bottom of the file, add:	  
 auto lo  
@@ -28,7 +30,7 @@ iface wlan0 inet static
 Enter the following into the file:  
 interface=wlan0  
 //	driver=nl80211  
-ssid=MyPiAP  
+ssid=**YOUR_SSID_HERE** 
 //	hw_mode=g  
 //	channel=6  
 channel=9  
@@ -40,7 +42,7 @@ channel=9
 //	ignore_broadcast_ssid=0  
 wpa=2  
 wpa_key_mgmt=WPA-PSK  
-wpa_passphrase=raspberry  
+wpa_passphrase=**YOUR_PASSPHRASE_HERE**
 rsn_pairwise=CCMP  
 
 ### Inform HostAPD of location of the previously created configuration file  
